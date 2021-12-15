@@ -15,7 +15,7 @@ def findLastVideo():
 # Connect to Youtube and accept the cookies
 ser = Service('/Users/maxime/Desktop/Code/Scrapping/selenium/chromedriver')
 driver = webdriver.Chrome(service = ser)
-driver.get('https://www.youtube.com/c/TurboA/videos')
+driver.get('https://www.youtube.com/channel/UCJLvLnSLEoJEMUrMMqNEomQ/videos')
 WebDriverWait(driver,20)
 driver.find_elements(By.XPATH,"//*[contains(text(), 'accepte')]")[-1].click()
 
@@ -27,7 +27,7 @@ print(last_video)
 while True:
     new_video = findLastVideo()
     if new_video != last_video:
-        print(new_video.text)
+        print(new_video)
         last_video = new_video
     else:
         print("No new video")
