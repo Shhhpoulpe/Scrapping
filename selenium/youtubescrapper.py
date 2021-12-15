@@ -5,6 +5,13 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 import time
 
+def findLastVideo():
+    driver.refresh()
+    time.sleep(10)
+    WebDriverWait(driver,20)
+    last_video = driver.find_element(By.ID,"video-title")
+    return last_video.text
+
 # Connect to Youtube and accept the cookies
 ser = Service('/Users/maxime/Desktop/Code/Scrapping/selenium/chromedriver')
 driver = webdriver.Chrome(service = ser)
@@ -14,16 +21,12 @@ driver.find_elements(By.XPATH,"//*[contains(text(), 'accepte')]")[-1].click()
 
 # Cherche la dernière vidéo
 
-WebDriverWait(driver,20)
-last_video = driver.find_element(By.ID,"video-title")
-print(last_video.text)
+last_video = findLastVideo()
+print(last_video)
 
 while True:
-    driver.refresh()
-    time.sleep(10)
-    WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, "video-title")))
-    new_video = driver.find_element(By.ID,"video-title")
-    if new_video.text != last_video.text:
+    new_video = findLastVideo()
+    if new_video != last_video:
         print(new_video.text)
         last_video = new_video
     else:
