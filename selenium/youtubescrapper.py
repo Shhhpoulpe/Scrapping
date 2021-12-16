@@ -37,7 +37,7 @@ async def myLoop():
     if new_video != last_video:
         print(new_video)
         last_video = new_video
-        await channel.send(new_video)
+        await channel.send(f"<@150281595679539201> {new_video} viens de sortir")
     else:
         print("No new video")
 
